@@ -5,7 +5,7 @@ import './movie-row.css';
 
 const ENTRIES_ON_ONE_PAGE = 5;
 
-const MovieRow = ({ title, movies, imageField, movieSx, progress }) => {
+const MovieRow = ({ title, movies, imageField, displayField, movieSx, progress }) => {
     const [page, setPage] = useState(1);
     
     const onPrevArrowClick = () => {
@@ -39,12 +39,12 @@ const MovieRow = ({ title, movies, imageField, movieSx, progress }) => {
                 </Box>
                 <Box className="movie-row-container" sx={{ display: 'flex', flexDirection: 'row', gap: '0.2rem', width: '90vw', overflowX: 'visible' }}>
                     { movies?.filter((movie,index) => index>=(page-1)*ENTRIES_ON_ONE_PAGE && index<page*ENTRIES_ON_ONE_PAGE).map((movie) => {
-                        return <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 100/(ENTRIES_ON_ONE_PAGE) + "%" }}>
+                        return <Box key = {movie?.id} sx={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', width: 100/(ENTRIES_ON_ONE_PAGE) + "%" }}>
+                            <Typography sx={{ position: 'absolute', top: '0.5rem', left: '0.5rem' }}>{movie[displayField ? displayField : "title"]}</Typography>
                             <Avatar 
                                 className = "movie-card"
-                                key = {movie?.id} 
                                 variant = "square" 
-                                alt = {movie?.title}
+                                alt = {movie[displayField ? displayField : "title"]}
                                 src = {"https://image.tmdb.org/t/p/original" + movie[imageField ? imageField : "backdrop_path"]} 
                                 sx = { movieSx ? movieSx : { width: '100%', height: 200 }} />
                             { progress ? <LinearProgress variant="determinate" value={Math.random()*100} sx={{ margin: '0.5rem', width: '80%', color: "#b9090b" }} /> : null }

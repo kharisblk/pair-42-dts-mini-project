@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import NavBar from '../components/NavBar';
 import MovieRow from '../components/MovieRow';
 import HomeMovieHero from '../components/HomeMovieHero';
 import Footer from '../components/Footer';
@@ -29,14 +30,15 @@ const HomePage = () => {
 
     return (
         <>
+            <NavBar />
             <HomeMovieHero />
 
             <MovieRow title="Popular" movies={popularMovies} />
-            <MovieRow title="Continue Watching" movies={popularTVs} progress={true}/>
+            <MovieRow title="Continue Watching" movies={popularTVs} displayField="name" progress={true}/>
             <MovieRow title="Upcoming Movies" movies={upcomingMovies} />
             <MovieRow title="Originals" movies={nowPlayingMovies} imageField="poster_path" movieSx={{ width: '100%', height: 500}} />
-            <MovieRow title="Top Indonesian" movies={airingTodayTVs} />
-            <MovieRow title="Watch Again" movies={topRatedTVs} />
+            <MovieRow title="Top Indonesian" movies={airingTodayTVs} displayField="name" />
+            <MovieRow title="Watch Again" movies={topRatedTVs} displayField="name" />
 
             <Footer />
         </>

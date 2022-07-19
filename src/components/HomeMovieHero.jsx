@@ -9,8 +9,8 @@ import { GetGenreList, GetTopRatedMovies } from '../apis/tmdb';
 const HomeMovieHero = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
     
-    const [movies, movieLoadingStatus, fetchMovies] = GetTopRatedMovies();
-    const [genres, genreLoadingStatus, fetchGenres] = GetGenreList();
+    const [movies, , fetchMovies] = GetTopRatedMovies();
+    const [genres, , fetchGenres] = GetGenreList();
 
     const onPrevArrowClick = () => {
         if (currentIndex > 1){
