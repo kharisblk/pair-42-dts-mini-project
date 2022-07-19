@@ -35,14 +35,14 @@ const GetGenreList = () => {
     return [data, loadingStatus, useCallback(fetch, [])];
 }
 
-const GetPopularMovies = () => {
+const GetPopularMovies = (page = 1) => {
     const [data, setData] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState(false);
 
     const fetch = async () => {
         try {
             setLoadingStatus(true);
-            const response = await tmdb.get(`/movie/popular`, {
+            const response = await tmdb.get(`/movie/popular?page=${page}`, {
 
             }, {
                 
@@ -56,17 +56,17 @@ const GetPopularMovies = () => {
         }
     }
 
-    return [data, loadingStatus, useCallback(fetch, [])];
+    return [data, loadingStatus, useCallback(fetch, [page])];
 }
 
-const GetTopRatedMovies = () => {
+const GetTopRatedMovies = (page = 1) => {
     const [data, setData] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState(false);
 
     const fetch = async () => {
         try {
             setLoadingStatus(true);
-            const response = await tmdb.get(`/movie/top_rated`, {
+            const response = await tmdb.get(`/movie/top_rated?page=${page}`, {
 
             }, {
                 
@@ -80,17 +80,17 @@ const GetTopRatedMovies = () => {
         }
     }
 
-    return [data, loadingStatus, useCallback(fetch, [])];
+    return [data, loadingStatus, useCallback(fetch, [page])];
 }
 
-const GetNowPlayingMovies = () => {
+const GetNowPlayingMovies = (page = 1) => {
     const [data, setData] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState(false);
 
     const fetch = async () => {
         try {
             setLoadingStatus(true);
-            const response = await tmdb.get(`/movie/now_playing`, {
+            const response = await tmdb.get(`/movie/now_playing?page=${page}`, {
 
             }, {
                 
@@ -104,17 +104,17 @@ const GetNowPlayingMovies = () => {
         }
     }
 
-    return [data, loadingStatus, useCallback(fetch, [])];
+    return [data, loadingStatus, useCallback(fetch, [page])];
 }
 
-const GetUpcomingMovies = () => {
+const GetUpcomingMovies = (page = 1) => {
     const [data, setData] = useState([]);
     const [loadingStatus, setLoadingStatus] = useState(false);
 
     const fetch = async () => {
         try {
             setLoadingStatus(true);
-            const response = await tmdb.get(`/movie/upcoming`, {
+            const response = await tmdb.get(`/movie/upcoming?page=${page}`, {
 
             }, {
                 
@@ -128,81 +128,60 @@ const GetUpcomingMovies = () => {
         }
     }
 
-    return [data, loadingStatus, useCallback(fetch, [])];
+    return [data, loadingStatus, useCallback(fetch, [page])];
 }
 
-const GetPopularTVs = () => {
-    const [data, setData] = useState([]);
+const GetMovieDetails = () => {
+    const [data, setData] = useState({});
     const [loadingStatus, setLoadingStatus] = useState(false);
+    const [error, setError] = useState(null);
 
-    const fetch = async () => {
+    const fetch = async (id) => {
         try {
             setLoadingStatus(true);
-            const response = await tmdb.get(`/tv/popular`, {
+            const response = await tmdb.get(`/movie/${id}`, {
 
             }, {
                 
             })
 
-            setData(response.data.results);
+            setData(response.data);
             setLoadingStatus(false);
         } catch (error) {
             console.log(error);
+            setError(error);
             setLoadingStatus(false);   
         }
     }
 
-    return [data, loadingStatus, useCallback(fetch, [])];
+    return [data, loadingStatus, error, useCallback(fetch, [])];
 }
 
-const GetAiringTodayTVs = () => {
-    const [data, setData] = useState([]);
+const GetMovieTrailer = () => {
+    const [data, setData] = useState({});
     const [loadingStatus, setLoadingStatus] = useState(false);
+    const [error, setError] = useState(null);
 
-    const fetch = async () => {
+    const fetch = async (id) => {
         try {
             setLoadingStatus(true);
-            const response = await tmdb.get(`/tv/airing_today`, {
+            const response = await tmdb.get(`/movie/${id}/videos`, {
 
             }, {
                 
             })
-
-            setData(response.data.results);
+            setData(response.data);
             setLoadingStatus(false);
         } catch (error) {
             console.log(error);
+            setError(error);
             setLoadingStatus(false);   
         }
     }
 
-    return [data, loadingStatus, useCallback(fetch, [])];
+    return [data, loadingStatus, error, useCallback(fetch, [])];
 }
 
-const GetTopRatedTVs = () => {
-    const [data, setData] = useState([]);
-    const [loadingStatus, setLoadingStatus] = useState(false);
-
-    const fetch = async () => {
-        try {
-            setLoadingStatus(true);
-            const response = await tmdb.get(`/tv/top_rated`, {
-
-            }, {
-                
-            })
-
-            setData(response.data.results);
-            setLoadingStatus(false);
-        } catch (error) {
-            console.log(error);
-            setLoadingStatus(false);   
-        }
-    }
-
-    return [data, loadingStatus, useCallback(fetch, [])];
-}
-
-export { GetGenreList, GetPopularMovies, GetTopRatedMovies, GetNowPlayingMovies, GetUpcomingMovies, GetPopularTVs, GetAiringTodayTVs, GetTopRatedTVs };
+export { GetGenreList, GetPopularMovies, GetTopRatedMovies, GetNowPlayingMovies, GetUpcomingMovies, GetMovieDetails, GetMovieTrailer };
 
 export default tmdb;
