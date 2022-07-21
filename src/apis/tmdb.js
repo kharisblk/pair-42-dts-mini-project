@@ -2,13 +2,14 @@ import { useState, useCallback } from "react";
 import axios from "axios";
 
 // const api_key = 'ce9e45daf3c3e402535b6b3ea7d00ff0';
-const api_key = process.env.REACT_APP_TMDB_KEY;
+// const api_key = process.env.REACT_APP_TMDB_KEY;
 
 const tmdb = axios.create({
 	baseURL: "https://api.themoviedb.org/3",
 	params: {
 		// TODO: Jangan lupa masukkan API_KEY yang benarnya di sini yah !
-		api_key: api_key,
+		// api_key: api_key,
+		api_key: process.env.REACT_APP_TMDB_KEY,
 	},
 });
 
