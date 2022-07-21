@@ -16,6 +16,10 @@ const HomePage = () => {
     const [popularMovies4, , fetchPopularMovies4] = GetPopularMovies(4);
 
     useEffect(() => {
+        document.title = "Movies | Home"
+    }, [])
+
+    useEffect(() => {
         const fetch = async () => {
             await fetchPopularMovies();
             await fetchPopularMovies2();

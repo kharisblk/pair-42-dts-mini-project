@@ -16,6 +16,10 @@ const DetailPage = () => {
     const [nowPlayingMovies, , fetchNowPlayingMovies] = GetNowPlayingMovies();
 
     useEffect(() => {
+        document.title = "Movies | " + detail?.title
+    }, [detail])
+
+    useEffect(() => {
         const fetch = async() => {
             await fetchPopularMovies();
             await fetchPopularMovies2();

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -51,6 +51,11 @@ export default function SignUp() {
             setErrorMessage(error.message);
         }
     };
+
+    useEffect(() => {
+        document.title = "Movies | Register";
+    }, [])
+
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
