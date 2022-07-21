@@ -2,7 +2,8 @@
 // import './App.css';
 import { ThemeProvider } from "@mui/material";
 import ResponsiveAppBar from "./components/NavBar";
-import Home from "./containers/Home";
+import { Outlet } from "react-router";
+import Footer from "./components/Footer";
 import theme from "./themes/theme";
 function App() {
 	return (
@@ -10,7 +11,8 @@ function App() {
 			<div className="App">
 				{/* <Navbar /> */}
 				<ResponsiveAppBar />
-				<Home />
+				<Outlet/>
+        		<Footer/>
 			</div>
 		</ThemeProvider>
 	);

@@ -193,4 +193,8 @@ const ResponsiveAppBar = () => {
         </AppBar >
     );
 };
+<<<<<<< HEAD
 export default ResponsiveAppBar;
+=======
+export default ResponsiveAppBar;
+>>>>>>> origin/ryandchandra

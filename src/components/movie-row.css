@@ -1,0 +1,8 @@
+.movie-card:hover {
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.arrow-container:hover img {
+    visibility: visible
+}
