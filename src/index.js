@@ -11,6 +11,8 @@ import DetailPage from "./containers/DetailPage";
 import DetailVideoPage from "./containers/DetailVideoPage";
 import MovieDetailHero from "./components/MovieDetailHero";
 import { Button } from "@mui/material";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./containers/ProfilePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,9 +21,30 @@ root.render(
 			<Routes>
 				<Route path="/" element={<App />}>
 					{/* <Route path="home" element={<HomePage />} /> */}
-					<Route path="movie" element={<DetailPage />} >
-						<Route path=":movieId/play" element={<DetailVideoPage />} />
-						<Route path=":movieId" element={<MovieDetailHero />} />	
+					<Route
+						path="movie"
+						element={
+							<ProtectedRoute>
+								<DetailPage />{" "}
+							</ProtectedRoute>
+						}
+					>
+						<Route
+							path=":movieId/play"
+							element={
+								<ProtectedRoute>
+									<DetailVideoPage />{" "}
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path=":movieId"
+							element={
+								<ProtectedRoute>
+									<MovieDetailHero />
+								</ProtectedRoute>
+							}
+						/>
 					</Route>
 					<Route path="/" element={<HomePage />} />
 					<Route
@@ -29,14 +52,32 @@ root.render(
 						element={
 							<main style={{ padding: "1rem 15rem" }}>
 								<p>There's nothing here!</p>
-								<Button href="/" variant="contained">Go Back</Button>
+								<Button href="/" variant="contained">
+									Go Back
+								</Button>
 							</main>
-						} />
+						}
+					/>
 				</Route>
 				{/* <Route path="login" element={<Login />} /> */}
-				<Route path="login" element={<SignInSide />} />
+				<Route
+					path="login"
+					element={
+						<ProtectedRoute loginOnly={false}>
+							<SignInSide />
+						</ProtectedRoute>
+					}
+				/>
 				{/* <Route path="register" element={<Register />} /> */}
-				<Route path="register" element={<SignUp />} />
+				<Route
+					path="register"
+					element={
+						<ProtectedRoute loginOnly={false}>
+							<SignUp />
+						</ProtectedRoute>
+					}
+				/>
+				<Route path="profile" element={<Profile />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>

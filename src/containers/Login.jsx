@@ -3,8 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../authentication/firebase';
+
 
 function Copyright(props) {
     return (
@@ -29,14 +33,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = React.useState('');
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+        const password = data.get('password');
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            navigate("/");
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
     };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     console.log({
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     });
+    // };
 
     return (
         <ThemeProvider theme={theme}>
@@ -49,6 +69,7 @@ export default function SignInSide() {
                     md={7}
                     sx={{
                         backgroundImage: 'url(https://source.unsplash.com/random)',
+                        // backgroundImage: '/images/logo_M.jpg',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -93,10 +114,11 @@ export default function SignInSide() {
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            <FormControlLabel
+                            <Typography color='red'>{errorMessage}</Typography>
+                            {/* <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
-                            />
+                            /> */}
                             <Button
                                 type="submit"
                                 fullWidth

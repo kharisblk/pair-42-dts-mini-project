@@ -19,14 +19,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import RedeemIcon from '@mui/icons-material/Redeem';
 import { grey } from "@mui/material/colors";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../authentication/firebase';
+//react-firebase-hooks 
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const pages = ['Home', 'Series', 'Movies', 'New and Popular', 'My List'];
-// const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
+    const [user] = useAuthState(auth);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -37,43 +42,39 @@ const ResponsiveAppBar = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
+        navigate("/");
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
 
-    const navigate = useNavigate();
 
-    const onLogout = () => {
-        navigate("/login");
+
+    // const onLogout = () => {
+    //     navigate("/login");
+    // };
+    const onLogout = async () => {
+        try {
+            await signOut(auth);
+            navigate("/login");
+        } catch (err) {
+            console.log(err);
+        }
     };
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
-                    {/* <Box maxWidth="10px">
-                        <img src={logo} className="App-logo" alt="logo" />
-                    </Box> */}
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography> */}
+                    <Link to="/">
+                        <Avatar
+                            alt="M Movie"
+                            src="/images/M.jfif"
+                            sx={{ width: 72, height: 72, display: { xs: 'none', md: 'flex' }, mr: 12 }}
+                            variant="square"
+                        // onClick={navigate("/")}
+                        />
+                    </Link>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -86,50 +87,39 @@ const ResponsiveAppBar = () => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            {pages.map((page) => (
+                        <Link to="/">
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorElNav}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                open={Boolean(anchorElNav)}
+                                onClose={handleCloseNavMenu}
+                                sx={{
+                                    display: { xs: 'block', md: 'none' },
+                                }}
+                            >
+                                {/* {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
-                            ))}
-                        </Menu>
+                            ))} */}
+                                <Typography textAlign="center">Home</Typography>
+                                <Typography textAlign="center">Series</Typography>
+                                <Typography textAlign="center">Movies</Typography>
+                                <Typography textAlign="center">New and Popular</Typography>
+                                <Typography textAlign="center">My List</Typography>
+                            </Menu>
+                        </Link>
                     </Box>
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography> */}
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -147,15 +137,17 @@ const ResponsiveAppBar = () => {
                     <IconButton size="large" aria-label="redeem" color="inherit" sx={{ mr: 2 }}>
                         <RedeemIcon ></RedeemIcon>
                     </IconButton>
+                    <Typography color="inherit" sx={{ mr: 2 }}>{user?.email}</Typography>
                     <IconButton size="large" aria-label="notification" color="inherit" sx={{ mr: 4 }}>
                         <Badge badgeContent={3} color="error" >
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
                     <Box sx={{ flexGrow: 0 }}>
+                        <Link to='profile'><Avatar alt="User" src="/images/av03.jpg" variant="square" /></Link>
                         <Tooltip title="Keluar">
                             <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                {/* <Avatar alt="User" src="/images/av03.jpg" variant="square" /> */}
                                 <ArrowDropDownIcon fontSize="large" sx={{ color: grey[100] }} />
                             </IconButton>
                         </Tooltip>
@@ -183,6 +175,7 @@ const ResponsiveAppBar = () => {
 
                             <MenuItem onClick={handleCloseUserMenu}>
                                 <Typography textAlign="center" onClick={onLogout}>Logout</Typography>
+                                {/* <Typography textAlign="center" onClick={user?.onLogout:onLogin}>Logout</Typography> */}
                             </MenuItem>
 
                         </Menu>
@@ -193,8 +186,4 @@ const ResponsiveAppBar = () => {
         </AppBar >
     );
 };
-<<<<<<< HEAD
 export default ResponsiveAppBar;
-=======
-export default ResponsiveAppBar;
->>>>>>> origin/ryandchandra
