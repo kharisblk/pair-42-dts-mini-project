@@ -16,10 +16,14 @@ const DetailPage = () => {
     const [nowPlayingMovies, , fetchNowPlayingMovies] = GetNowPlayingMovies();
 
     useEffect(() => {
-        fetchPopularMovies();
-        fetchPopularMovies2();
-        fetchUpcomingMovies();
-        fetchNowPlayingMovies();
+        const fetch = async() => {
+            await fetchPopularMovies();
+            await fetchPopularMovies2();
+            await fetchUpcomingMovies();
+            await fetchNowPlayingMovies();
+        }
+        
+        fetch();
     }, [fetchPopularMovies, fetchPopularMovies2, fetchUpcomingMovies, fetchNowPlayingMovies])
 
     useEffect(() => {
@@ -28,9 +32,11 @@ const DetailPage = () => {
 
     useEffect(() => {
         if (isError){
-            navigate('/home');
+            navigate('/not-found');
         }
     }, [isError, navigate])
+
+    console.log(detail, isError);
 
     return (
         <>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Typography, useMediaQuery } from '@mui/material';
 
 const Footer = () => {
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:899px)');
 
     return (
         <> 
@@ -13,7 +13,7 @@ const Footer = () => {
                     <Typography>Security</Typography>
                     <Typography>Contact Us</Typography>
                     <Button sx={{ borderColor: '#777777', color: '#777777', width: 'fit-content' }} variant="outlined">Service Code</Button>
-                    <Typography>&copy; 2022 Movies, All Rights Reserved</Typography>
+                    <Typography>&copy; 2022 Pair-42 REA2A, All Rights Reserved</Typography>
                 </Box>
                 { !isMobile ? (
                     <>

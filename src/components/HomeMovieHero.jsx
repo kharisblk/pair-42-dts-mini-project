@@ -9,7 +9,7 @@ import { GetGenreList, GetTopRatedMovies } from '../apis/tmdb';
 const HomeMovieHero = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:899px)');
     
     const [movies, , fetchMovies] = GetTopRatedMovies();
     const [genres, , fetchGenres] = GetGenreList();
@@ -54,8 +54,9 @@ const HomeMovieHero = () => {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         alignSelf: 'stretch', 
-                        width: '3vw'
-                    }}>
+                        width: '3vw',
+                        cursor: 'pointer'
+                    }} onClick={onPrevArrowClick}>
                         <Avatar sx={{ cursor: 'pointer', visibility: 'hidden' }} alt="Prev" src="/images/icons/prev-arrow.png" onClick={onPrevArrowClick} />
                     </Box>
                     <HomeMovieHeroCard movie={movies[currentIndex]} genres={genres} />
@@ -65,8 +66,9 @@ const HomeMovieHero = () => {
                         justifyContent: 'center', 
                         backgroundColor: '#030a15', 
                         alignSelf: 'stretch', 
-                        width: '3vw'
-                    }}>
+                        width: '3vw',
+                        cursor: 'pointer'
+                    }} onClick={onNextArrowClick}>
                         <Avatar sx={{ cursor: 'pointer', visibility: 'hidden' }} alt="Next" src="/images/icons/next-arrow.png" onClick={onNextArrowClick} />
                     </Box>
                 </Box>

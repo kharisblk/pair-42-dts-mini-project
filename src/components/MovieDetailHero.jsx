@@ -4,7 +4,7 @@ import { GetMovieDetails } from '../apis/tmdb';
 import { Box, Button, Typography, useMediaQuery } from '@mui/material';
 
 const MovieDetailHero = () => {
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:899px)');
 
     const params = useParams();
     const navigate = useNavigate();

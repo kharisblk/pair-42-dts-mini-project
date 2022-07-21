@@ -4,7 +4,11 @@ import { Navigate } from 'react-router-dom';
 import { auth } from '../authentication/firebase';
 
 const ProtectedRoute = ({ children, loginOnly = true }) => {
-    const [user] = useAuthState(auth);
+    const [user, isLoading] = useAuthState(auth);
+
+    if (isLoading){
+        return;
+    }
 
     if (!user && loginOnly) {
         return <Navigate to="/login" />;

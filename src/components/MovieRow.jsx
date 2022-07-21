@@ -8,7 +8,7 @@ import { useMediaQuery } from '@mui/material';
 const MovieRow = ({ title, movies, imageField, movieSx, progress, children }) => {
     const [page, setPage] = useState(1);
     
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:899px)');
 
     const ENTRIES_ON_ONE_PAGE = isMobile ? 2 : 5;
 

@@ -3,7 +3,7 @@ import { Avatar, Box, Typography, useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const HomeMovieHeroCard = ({ movie, genres }) => {
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:899px)');
 
     if (!isMobile) {
         return (
@@ -15,7 +15,7 @@ const HomeMovieHeroCard = ({ movie, genres }) => {
                             <br />
                             <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#c9cbcc' }}>{movie?.genre_ids?.map((genre_id) => genres[genres?.findIndex((genre) => genre.id === genre_id)]?.name).join(" - ")}</Typography>
                             <br />
-                            <Typography variant="body2" sx={{ color: '#c9cbcc' }}>{movie?.overview}</Typography>
+                            <Typography variant="body1" sx={{ color: '#c9cbcc' }}>{movie?.overview}</Typography>
                         </Box>
                         <Avatar
                             sx={{ width: '50%', height: '100%', maskImage: 'linear-gradient(to right, transparent 0%, transparent 5px, black 100%)' }}

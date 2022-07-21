@@ -25,26 +25,12 @@ root.render(
 						path="movie"
 						element={
 							<ProtectedRoute>
-								<DetailPage />{" "}
+								<DetailPage />
 							</ProtectedRoute>
 						}
 					>
-						<Route
-							path=":movieId/play"
-							element={
-								<ProtectedRoute>
-									<DetailVideoPage />{" "}
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path=":movieId"
-							element={
-								<ProtectedRoute>
-									<MovieDetailHero />
-								</ProtectedRoute>
-							}
-						/>
+						<Route path=":movieId/play" element={<DetailVideoPage />} />
+						<Route path=":movieId" element={<MovieDetailHero />} />
 					</Route>
 					<Route path="/" element={<HomePage />} />
 					<Route
