@@ -46,7 +46,7 @@ export default function SignUp() {
         try {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             console.log(user);
-            navigate("/");
+            navigate("/home");
         } catch (error) {
             setErrorMessage(error.message);
         }

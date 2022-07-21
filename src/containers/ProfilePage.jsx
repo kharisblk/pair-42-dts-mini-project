@@ -64,9 +64,11 @@ function Profile() {
                             gap: 2,
                         }}
                     >
-                        <Button variant="contained" color="primary">
-                            MANAGE PROFILE
-                        </Button>
+                        <Link to="/home">
+                            <Button variant="contained" color="primary">
+                                GO TO HOME
+                            </Button>
+                        </Link>
 
                         {/* <Button variant="contained" color="secondary">
               Halo Warna Biru

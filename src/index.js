@@ -32,7 +32,8 @@ root.render(
 						<Route path=":movieId/play" element={<DetailVideoPage />} />
 						<Route path=":movieId" element={<MovieDetailHero />} />
 					</Route>
-					<Route path="/" element={<HomePage />} />
+					<Route path="/" element={<Profile />} />
+					<Route path="/home" element={<HomePage />} />
 					<Route
 						path="*"
 						element={
@@ -63,7 +64,6 @@ root.render(
 						</ProtectedRoute>
 					}
 				/>
-				<Route path="profile" element={<Profile />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>

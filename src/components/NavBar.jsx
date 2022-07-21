@@ -42,7 +42,7 @@ const ResponsiveAppBar = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        navigate("/");
+        navigate("/home");
     };
 
     const handleCloseUserMenu = () => {
@@ -87,37 +87,37 @@ const ResponsiveAppBar = () => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Link to="/">
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {/* {pages.map((page) => (
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
+                            {/* {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))} */}
-                                <Typography textAlign="center">Home</Typography>
-                                <Typography textAlign="center">Series</Typography>
-                                <Typography textAlign="center">Movies</Typography>
-                                <Typography textAlign="center">New and Popular</Typography>
-                                <Typography textAlign="center">My List</Typography>
-                            </Menu>
-                        </Link>
+                            <Typography textAlign="center">Home</Typography>
+                            <Typography textAlign="center">Series</Typography>
+                            <Typography textAlign="center">Movies</Typography>
+                            <Typography textAlign="center">New and Popular</Typography>
+                            <Typography textAlign="center">My List</Typography>
+
+                        </Menu>
+
                     </Box>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -144,7 +144,8 @@ const ResponsiveAppBar = () => {
                         </Badge>
                     </IconButton>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Link to='profile'><Avatar alt="User" src="/images/av03.jpg" variant="square" /></Link>
+                        {/* <Link to='profile'><Avatar alt="User" src="/images/av03.jpg" variant="square" /></Link> */}
+                        <Avatar alt="User" src="/images/av03.jpg" variant="square" />
                         <Tooltip title="Keluar">
                             <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
                                 {/* <Avatar alt="User" src="/images/av03.jpg" variant="square" /> */}

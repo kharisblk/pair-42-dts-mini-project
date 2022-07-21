@@ -6,7 +6,7 @@ import { auth } from '../authentication/firebase';
 const ProtectedRoute = ({ children, loginOnly = true }) => {
     const [user, isLoading] = useAuthState(auth);
 
-    if (isLoading){
+    if (isLoading) {
         return;
     }
 
@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children, loginOnly = true }) => {
     }
 
     if (user && !loginOnly) {
-        return <Navigate to="/" />;
+        return <Navigate to="/home" />;
     }
 
     return children;

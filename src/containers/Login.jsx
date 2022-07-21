@@ -45,7 +45,7 @@ export default function SignInSide() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate("/");
+            navigate("/home");
         } catch (error) {
             setErrorMessage(error.message);
         }
