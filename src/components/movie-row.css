@@ -1,6 +1,14 @@
-.movie-card:hover {
+.movie-card-container .movie-card-title {
+    visibility: hidden;
+}
+
+.movie-card-container:hover .movie-card {
     opacity: 0.3;
     cursor: pointer;
+}
+
+.movie-card-container:hover .movie-card-title {
+    visibility: visible;
 }
 
 .arrow-container:hover img {

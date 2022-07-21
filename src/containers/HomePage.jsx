@@ -40,7 +40,7 @@ const HomePage = () => {
             <MovieRow title="Popular" movies={popularMovies} />
             <MovieRow title="Continue Watching" movies={popularMovies2} progress={true}/>
             <MovieRow title="Upcoming Movies" movies={upcomingMovies} />
-            <MovieRow title="Originals" movies={nowPlayingMovies} imageField="poster_path" movieSx={{ width: '100%', height: 500}} />
+            <MovieRow title="Originals" movies={nowPlayingMovies} imageField="poster_path" movieSx={{ width: '100%', height: 600 }} />
             <MovieRow title="Top 10 Movies" movies={topRatedMovies.filter((item,index) => index<10)}>
                 <TopMovieCard />
             </MovieRow>

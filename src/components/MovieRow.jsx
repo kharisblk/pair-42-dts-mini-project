@@ -46,8 +46,8 @@ const MovieRow = ({ title, movies, imageField, movieSx, progress, children }) =>
                         if (children){
                             return React.cloneElement(children, { key:movie?.id , movie: movie, index: (page-1)*ENTRIES_ON_ONE_PAGE + index + 1, ENTRIES_ON_ONE_PAGE: ENTRIES_ON_ONE_PAGE })
                         }
-                        return <Box key = {movie?.id} sx={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', width: 100/(ENTRIES_ON_ONE_PAGE) + "%" }}>
-                                <Typography sx={{ position: 'absolute', top: '0.5rem', left: '0.5rem' }}>{movie?.title}</Typography>
+                        return <Box className="movie-card-container" key = {movie?.id} sx={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', width: 100/(ENTRIES_ON_ONE_PAGE) + "%" }}>
+                                <Typography className="movie-card-title" sx={{ position: 'absolute', top: '0.5rem', left: '0.5rem' }}>{movie?.title}</Typography>
                                 <Link to={`/movie/${movie?.id}`}>
                                 <Avatar 
                                     className = "movie-card"
